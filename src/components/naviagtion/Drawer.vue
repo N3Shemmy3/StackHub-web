@@ -1,48 +1,3 @@
-<script lang="ts" setup>
-import { MenuIcon } from "@heroicons/vue/outline";
-
-//Variables
-let isRTL = false;
-let isDrawerOpen = true;
-let showDrawerOverlay = true;
-
-const drawerMenu = [
-  {
-    icon: MenuIcon,
-    title: "Menu Item",
-    active: true,
-  },
-  {
-    icon: MenuIcon,
-    title: "Menu Item",
-    active: false,
-  },
-  {
-    icon: MenuIcon,
-    title: "Menu Item",
-    active: false,
-  },
-  {
-    icon: MenuIcon,
-    title: "Menu Item",
-    active: false,
-  },
-  {
-    icon: MenuIcon,
-    title: "Menu Item",
-    active: false,
-  },
-  {
-    icon: MenuIcon,
-    title: "Menu Item",
-    active: false,
-  },
-];
-
-function toggleDrawer() {
-  isDrawerOpen = !isDrawerOpen;
-}
-</script>
 
 <template>
   <ul
@@ -50,9 +5,11 @@ function toggleDrawer() {
       w-80
       p-4
       h-full
+      z-60
+      md:left-0
       shadow-md
       bg-colorSurface
-      relative
+      absolute
       transition-all
       duration-300
       ease-in-out
@@ -63,15 +20,13 @@ function toggleDrawer() {
       <p class="text-colorOnSurface title-large font-extrabold">StackHub</p>
     </div>
     <li
-      v-for="menuItem in drawerMenu"
-      :key="menuItem.title"
+      v-for="menuItem in props.menu"
+      :key="menuItem.Title"
       class="
         flex
         items-center
         p-4
         h-12
-        overflow-hidden
-        whitespace-nowrap
         rounded-3xl
         hover:bg-colorPrimaryContainer
         active:bg-colorPrimaryContainer
@@ -80,12 +35,11 @@ function toggleDrawer() {
         ease-in-out
         cursor-pointer
       "
-      href="#!"
+      @click.capture="onDrawerItemClicked()"
       data-mdb-ripple="true"
-      data-mdb-ripple-color="dark"
     >
       <component
-        :is="menuItem.icon"
+        :is="menuItem.Icon"
         class="
           h-6
           w-6
@@ -94,15 +48,18 @@ function toggleDrawer() {
           active:text-colorOnSecondaryContainer
           hover:text-colorOnSecondaryContainer
         "
+        data-mdb-ripple="true"
+        data-mdb-ripple-color="bg-colorPrimary"
       />
       <p
         class="
+          font-semibold
           text-label-large text-colorOnSurfaceVariant
           active:text-colorOnSecondaryContainer
           hover:text-colorOnSecondaryContainer
         "
       >
-        {{ menuItem.title }}
+        {{ menuItem.Title }}
       </p>
     </li>
   </ul>
@@ -110,15 +67,40 @@ function toggleDrawer() {
   <transition name="fade">
     <!-- showDrawerOverlay -->
     <div
-      v-if="showDrawerOverlay && isDrawerOpen"
+      v-if="isDrawerOpen && showDrawerOverlay"
       @click="toggleDrawer()"
       class="
+        absolute
         flex-1
-        bg-gray-400 bg-opacity-75
+        w-full
+        h-full
+        bg-gray-400 bg-opacity-60
         active:outline-none
         z-10
-        md:hidden
       "
     />
   </transition>
 </template>
+
+<script lang="ts" setup>
+import { MenuItem } from "@/classes/UiClasses.vue";
+import { MenuIcon } from "@heroicons/vue/outline";
+import { FunctionalComponent, onMounted, ref } from "@vue/runtime-core";
+import { computed } from "vue";
+
+const props = defineProps<{
+  isDrawerOpen: Boolean;
+  menu: Array<MenuItem>;
+}>();
+//Variables
+let isRTL = false;
+let isDrawerOpen = false;
+let showDrawerOverlay = true;
+var menu: Array<MenuItem> = Array<MenuItem>();
+
+function toggleDrawer() {
+  isDrawerOpen = !isDrawerOpen;
+}
+
+function onDrawerItemClicked() {}
+</script>

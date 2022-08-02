@@ -1,29 +1,3 @@
-<script lang="ts" setup>
-import { MenuIcon, ArrowLeftIcon } from "@heroicons/vue/outline";
-import MenuItem from "@/classes/frontend/MenuItem";
-
-const props = defineProps<{
-  navigateUp: boolean;
-  title: string;
-  menu: Array<MenuItem>;
-  avatar: string;
-}>();
-
-const navigateUp = true;
-var title = "Toolbar";
-var avatar = "https://avatars.githubusercontent.com/u/67279072?v=4";
-
-//toolbar methods
-function onBackItemClicked() {
-  console.log("onBackItemClicked");
-}
-function onMenuItemClicked(menuId: String) {
-  console.log(menuId);
-}
-function onAvatarItemClicked() {
-  console.log("Avatar");
-}
-</script>
 
 <template>
   <nav
@@ -49,7 +23,7 @@ function onAvatarItemClicked() {
     >
       <component
         :is="props.navigateUp ? ArrowLeftIcon : MenuIcon"
-        class="h-6 w-6 text-colorOnSurface align-middle"
+        class="h-6 w-6 md:hidden text-colorOnSurface align-middle"
         alt="{{navigateUp? Open Drawer : navigate back}}"
       />
     </div>
@@ -66,16 +40,16 @@ function onAvatarItemClicked() {
     <div
       id="MenuItems"
       v-for="menuItem in props.menu"
-      :key="menuItem.id"
+      :key="menuItem.Id"
       data-mdb-ripple="true"
       data-mdb-ripple-color="light"
       transition-all
       duration-150
-      @click.capture="onMenuItemClicked(menuItem.id)"
+      @click.capture="onMenuItemClicked(menuItem.Id)"
       class="w-12 h-12 p-3 align-middle cursor-pointer"
     >
       <component
-        :is="menuItem.icon"
+        :is="menuItem.Icon"
         class="h-6 w-6 text-colorOnSurface"
         alt="{{menuItem.title}}"
       />
@@ -95,3 +69,28 @@ function onAvatarItemClicked() {
     </div>
   </nav>
 </template>
+
+
+<script lang="ts" setup>
+import { MenuItem } from "@/classes/UiClasses.vue";
+import { MenuIcon, ArrowLeftIcon } from "@heroicons/vue/outline";
+import { FunctionalComponent } from "vue";
+
+const props = defineProps<{
+  navigateUp: Boolean;
+  title: String;
+  menu: Array<MenuItem>;
+  avatar: String;
+}>();
+
+//toolbar methods
+function onBackItemClicked() {
+  console.log("onBackItemClicked");
+}
+function onMenuItemClicked(menuId: Number) {
+  console.log(menuId);
+}
+function onAvatarItemClicked() {
+  console.log("Avatar");
+}
+</script>
