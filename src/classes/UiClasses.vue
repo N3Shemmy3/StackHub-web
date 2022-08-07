@@ -1,11 +1,9 @@
 <template>
-  <div></div>
+  <div id="classes"></div>
 </template>
 
-<script setup>
-</script>
-
 <script lang="ts">
+export default {};
 import { FunctionalComponent } from "vue";
 
 //classes
@@ -47,3 +45,5 @@ export class MenuItem {
   }
 }
 </script>
+<style>
+</style>

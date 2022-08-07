@@ -23,7 +23,7 @@
     >
       <component
         :is="props.navigateUp ? ArrowLeftIcon : MenuIcon"
-        class="h-6 w-6 md:hidden text-colorOnSurface align-middle"
+        class="h-6 w-6 text-colorOnSurface align-middle"
         alt="{{navigateUp? Open Drawer : navigate back}}"
       />
     </div>

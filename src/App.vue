@@ -32,7 +32,9 @@
         avatar="https://avatars.githubusercontent.com/u/67279072?v=4"
       />
 
-      <div id="content"></div>
+      <div id="content">
+        <Icon icon="menu" alt="menu" />
+      </div>
     </div>
     <UiClasses />
   </div>
@@ -41,6 +43,7 @@
 
 <script setup lang="ts">
 import { FunctionalComponent, onMounted, ref } from "vue";
+import Icon from "@/components/md/Icon.vue";
 import Toolbar from "./components/naviagtion/Toolbar.vue";
 import Drawer from "./components/naviagtion/Drawer.vue";
 import {
@@ -96,6 +99,6 @@ function getToolbarMenu(key: string): Array<MenuItem> {
 </script>
 
 
-<style scoped>
+<style src="">
 </style>
   
