@@ -4,19 +4,18 @@
 
 <script lang="ts">
 export default {};
-import { FunctionalComponent } from "vue";
 
 //classes
 export class MenuItem {
   private id: number;
-  private icon: FunctionalComponent;
+  private icon: String;
   private title: string;
 
   /*
     constructor() { }
     */
 
-  constructor(id: number, icon: FunctionalComponent, title: string) {
+  constructor(id: number, icon: String, title: string) {
     this.id = id;
     this.icon = icon;
     this.title = title;
@@ -26,7 +25,7 @@ export class MenuItem {
   set Id(id: number) {
     this.Id = id;
   }
-  set Icon(icon: FunctionalComponent) {
+  set Icon(icon: String) {
     this.icon = icon;
   }
   set Title(title: string) {

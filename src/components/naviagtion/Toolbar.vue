@@ -21,10 +21,9 @@
       data-mdb-ripple-color="light"
       @click.capture="onBackItemClicked()"
     >
-      <component
-        :is="props.navigateUp ? ArrowLeftIcon : MenuIcon"
-        class="h-6 w-6 text-colorOnSurface align-middle"
-        alt="{{navigateUp? Open Drawer : navigate back}}"
+      <Icon
+        icon="{{props.navigateUp ? 'arrow_back' : 'menu'}}"
+        alt="{{menuItem.title}}"
       />
     </div>
 
@@ -48,12 +47,9 @@
       @click.capture="onMenuItemClicked(menuItem.Id)"
       class="w-12 h-12 p-3 align-middle cursor-pointer"
     >
-      <component
-        :is="menuItem.Icon"
-        class="h-6 w-6 text-colorOnSurface"
-        alt="{{menuItem.title}}"
-      />
+      <Icon icon="{{menuItem.Icon}}" alt="{{menuItem.title}}" />
     </div>
+
     <div
       class="w-12 h-12 p-2 cursor-pointer align-middle"
       data-mdb-ripple="true"
@@ -72,6 +68,7 @@
 
 
 <script lang="ts" setup>
+import Icon from "./components/md/Icon.vue";
 import { MenuItem } from "@/classes/UiClasses.vue";
 import { MenuIcon, ArrowLeftIcon } from "@heroicons/vue/outline";
 import { FunctionalComponent } from "vue";

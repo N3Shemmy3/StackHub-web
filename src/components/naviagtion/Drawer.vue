@@ -38,6 +38,15 @@
       @click.capture="onDrawerItemClicked()"
       data-mdb-ripple="true"
     >
+      <Icon
+        icon="{{menuItem.Icon}}"
+        alt="{{menuItem.title}}"
+        class="
+          text-colorOnSurfaceVariant
+          active:text-colorOnSecondaryContainer
+          hover:text-colorOnSecondaryContainer
+        "
+      />
       <component
         :is="menuItem.Icon"
         class="
@@ -46,7 +55,6 @@
           mr-2
           text-colorOnSurfaceVariant
           active:text-colorOnSecondaryContainer
-          hover:text-colorOnSecondaryContainer
         "
         data-mdb-ripple="true"
         data-mdb-ripple-color="bg-colorPrimary"
@@ -83,6 +91,7 @@
 </template>
 
 <script lang="ts" setup>
+import Icon from "./components/md/Icon.vue";
 import { MenuItem } from "@/classes/UiClasses.vue";
 import { MenuIcon } from "@heroicons/vue/outline";
 import { FunctionalComponent, onMounted, ref } from "@vue/runtime-core";

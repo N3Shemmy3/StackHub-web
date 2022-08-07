@@ -43,7 +43,7 @@
 
 <script setup lang="ts">
 import { FunctionalComponent, onMounted, ref } from "vue";
-import Icon from "@/components/md/Icon.vue";
+import Icon from "./components/md/Icon.vue";
 import Toolbar from "./components/naviagtion/Toolbar.vue";
 import Drawer from "./components/naviagtion/Drawer.vue";
 import {
@@ -64,14 +64,14 @@ function getDrawerMenu(key: string): Array<MenuItem> {
   let list: Array<MenuItem> = new Array<MenuItem>();
   switch (key) {
     case "home":
-      list.push(new MenuItem(0, HomeIcon, "Home"));
-      list.push(new MenuItem(1, InboxIcon, "Inbox"));
-      list.push(new MenuItem(2, CloudIcon, "Codespaces "));
-      list.push(new MenuItem(3, BellIcon, "Notifications "));
-      list.push(new MenuItem(4, CogIcon, "Settings "));
-      list.push(new MenuItem(5, MenuIcon, "MenuItem "));
-      list.push(new MenuItem(6, MenuIcon, "MenuItem "));
-      list.push(new MenuItem(7, MenuIcon, "MenuItem "));
+      list.push(new MenuItem(0, "home", "Home"));
+      list.push(new MenuItem(1, "inbox", "Inbox"));
+      list.push(new MenuItem(2, "cloud", "Codespaces "));
+      list.push(new MenuItem(3, "notifications", "Notifications "));
+      list.push(new MenuItem(4, "setings", "Settings "));
+      list.push(new MenuItem(5, "menu", "MenuItem "));
+      list.push(new MenuItem(6, "menu", "MenuItem "));
+      list.push(new MenuItem(7, "menu", "MenuItem "));
 
       break;
 
@@ -86,7 +86,7 @@ function getToolbarMenu(key: string): Array<MenuItem> {
   switch (key) {
     case "home":
       for (let index = 0; index < 3; index++) {
-        const item = new MenuItem(index, MenuIcon, "MenuItem " + index);
+        const item = new MenuItem(index, "menu", "MenuItem " + index);
         list.push(item);
       }
       break;
