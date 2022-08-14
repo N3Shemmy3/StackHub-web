@@ -10,6 +10,7 @@ export class MenuItem {
   private id: number;
   private icon: String;
   private title: string;
+  private path?: String;
 
   /*
     constructor() { }
@@ -31,6 +32,9 @@ export class MenuItem {
   set Title(title: string) {
     this.title = title;
   }
+  set Path(path: String) {
+    this.path = path;
+  }
 
   //getters
   get Id() {
@@ -41,6 +45,9 @@ export class MenuItem {
   }
   get Title() {
     return this.title;
+  }
+  get Path() {
+    return this.Path;
   }
 }
 </script>

@@ -22,10 +22,10 @@ const people = [
 </script>
 
 <template>
-  <ul class="divide-y divide-gray-200">
+  <ul class="p-6 divide-y divide-slate-200">
     <li v-for="person in people" :key="person.email" class="py-4 flex">
       <img class="h-10 w-10 rounded-full" :src="person.image" alt="" />
-      <div class="ml-3">
+      <div class="ml-3 overflow-hidden">
         <p class="text-sm font-medium text-gray-900">{{ person.name }}</p>
         <p class="text-sm text-gray-500">{{ person.email }}</p>
       </div>
@@ -34,5 +34,4 @@ const people = [
 </template>
 
 <style scoped>
-
 </style>

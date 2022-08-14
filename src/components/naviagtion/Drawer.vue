@@ -1,74 +1,91 @@
-
 <template>
+<div>
+
   <ul
     class="
-      w-80
+      md:w-80
       p-4
       h-full
-      z-60
+      z-3
       md:left-0
       shadow-md
       bg-colorSurface
-      absolute
       transition-all
       duration-300
       ease-in-out
+      absolute
+      md:relative
     "
   >
     <div class="p-2 mb-1 flex items-center">
-      <MenuIcon class="w-6 h-6 mr-3 text-colorPrimary"></MenuIcon>
-      <p class="text-colorOnSurface title-large font-extrabold">StackHub</p>
+      <Icon
+        icon="menu"
+        alt="Home Page"
+        @click="toggleDrawer()"
+        class="mr-3 text-colorPrimary"
+      />
+      <p class="text-colorOnSurface title-large font-extrabold">
+        StackHub {{ activeId }}
+      </p>
     </div>
+
     <li
-      v-for="menuItem in props.menu"
-      :key="menuItem.Title"
+      v-for="(menuItem, index) in menu"
+      :key="menuItem.Id"
+      to="{{menuItem.Path}}"
       class="
-        flex
+        group
         items-center
-        p-4
-        h-12
+        flex
+        shrink
+        p-3
+        my-1
         rounded-3xl
-        hover:bg-colorPrimaryContainer
-        active:bg-colorPrimaryContainer
+        active:bg-colorSecondaryContainer
+        hover:bg-colorOnPrimaryContainer hover:bg-opacity-10
         transition-all
-        duration-300
+        duration-250
         ease-in-out
         cursor-pointer
       "
-      @click.capture="onDrawerItemClicked()"
-      data-mdb-ripple="true"
+      :class="index == activeId ? 'bg-colorSecondaryContainer' : 'null'"
+      @click="onDrawerItemClicked(menuItem)"
     >
-      <Icon
-        icon="{{menuItem.Icon}}"
-        alt="{{menuItem.title}}"
+      <div
         class="
-          text-colorOnSurfaceVariant
-          active:text-colorOnSecondaryContainer
-          hover:text-colorOnSecondaryContainer
+          relative
+          group-hover:opacity-90
+          bg-colorSecondaryContainer
+          ease-in-out
+          transition-all
         "
       />
-      <component
-        :is="menuItem.Icon"
-        class="
-          h-6
-          w-6
-          mr-2
-          text-colorOnSurfaceVariant
-          active:text-colorOnSecondaryContainer
-        "
-        data-mdb-ripple="true"
-        data-mdb-ripple-color="bg-colorPrimary"
-      />
-      <p
-        class="
-          font-semibold
-          text-label-large text-colorOnSurfaceVariant
-          active:text-colorOnSecondaryContainer
-          hover:text-colorOnSecondaryContainer
-        "
-      >
-        {{ menuItem.Title }}
-      </p>
+      <div class="flex items-center">
+        <Icon
+          :icon="menuItem.Icon"
+          :alt="menuItem.Title"
+          class="
+            mr-6
+            text-colorOnSurfaceVariant
+            group-active:text-colorOnSecondaryContainer
+            group-hover:text-colorOnSecondaryContainer
+          "
+          :class="index == activeId ? 'text-colorOnSecondaryContainer' : 'null'"
+        />
+
+        <p
+          :class="index == activeId ? 'text-colorOnSecondaryContainer' : 'null'"
+          class="
+            font-semibold
+            headline
+            text-colorOnSurfaceVariant
+            group-active:text-colorOnSecondaryContainer
+            group-hover:text-colorOnSecondaryContainer
+          "
+        >
+          {{ menuItem.Title }}
+        </p>
+      </div>
     </li>
   </ul>
 
@@ -79,37 +96,45 @@
       @click="toggleDrawer()"
       class="
         absolute
-        flex-1
         w-full
         h-full
         bg-gray-400 bg-opacity-60
         active:outline-none
-        z-10
+        z-2
       "
     />
   </transition>
+    </div>
 </template>
+<style>
+</style>
 
 <script lang="ts" setup>
-import Icon from "./components/md/Icon.vue";
+import Icon from "../md/Icon.vue";
 import { MenuItem } from "@/classes/UiClasses.vue";
-import { MenuIcon } from "@heroicons/vue/outline";
-import { FunctionalComponent, onMounted, ref } from "@vue/runtime-core";
-import { computed } from "vue";
+import { computed, ref } from "vue";
+import { useRoute } from "vue-router";
 
 const props = defineProps<{
   isDrawerOpen: Boolean;
   menu: Array<MenuItem>;
 }>();
+
+const route = useRoute();
 //Variables
 let isRTL = false;
 let isDrawerOpen = false;
 let showDrawerOverlay = true;
-var menu: Array<MenuItem> = Array<MenuItem>();
+var menu: Array<MenuItem> = props.menu;
+let activeId = ref(0);
 
 function toggleDrawer() {
   isDrawerOpen = !isDrawerOpen;
 }
-
-function onDrawerItemClicked() {}
+function setActive(menuItem: MenuItem) {
+  activeId.value = menuItem.Id;
+}
+function onDrawerItemClicked(menuItem: MenuItem) {
+  setActive(menuItem);
+}
 </script>
