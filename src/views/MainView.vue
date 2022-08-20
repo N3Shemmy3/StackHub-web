@@ -48,14 +48,13 @@
 
 
 <script setup lang="ts">
-import Icon from "../components/md/Icon.vue";
-import Toolbar from "../components/naviagtion/Toolbar.vue";
-import Drawer from "../components/naviagtion/Drawer.vue";
+import Toolbar from "../components/toolbar/Toolbar.vue";
+import Drawer from "../components/drawer/Drawer.vue";
 import { MenuItem } from "../classes/UiClasses.vue";
 import { ref } from "vue";
 
 var menu: Array<MenuItem> = Array<MenuItem>();
-var isDrawerOpen = ref(true);
+var isDrawerOpen = true;
 
 function getDrawerMenu(key: string): Array<MenuItem> {
   let list: Array<MenuItem> = new Array<MenuItem>();

@@ -11,5 +11,3 @@ const props = defineProps<{
   alt: String;
 }>();
 </script>
-<style>
-</style>

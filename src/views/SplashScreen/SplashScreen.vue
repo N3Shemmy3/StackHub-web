@@ -1,14 +1,17 @@
 <template>
   <div :class="{ loader: true, fadeout: !isLoading }">
-  <div class="content">
-    Hmmmmmm
-      <Icon icon="settings" alt="App Icon" class=" text-colorOnSurface "/>
+    <div class="content">
+      <svg width="144" height="144">
+        <path
+          class="fill-colorOnSecondary"
+          d="M8 42V18L24.1 6 40 18v24H28.3V27.75h-8.65V42Zm3-3h5.65V24.75H31.3V39H37V19.5L24.1 9.75 11 19.5Zm13-14.65Z"
+        />
+      </svg>
+    </div>
   </div>
- </div>
 </template>
 
 <script setup lang="ts">
-import Icon from "./components/md/Icon.vue"
 const props = defineProps<{
   isLoading: Boolean;
 }>();
@@ -16,23 +19,23 @@ const props = defineProps<{
 
 <style>
 .loader {
-@apply bg-colorSurface w-full h-full bottom-0 text-colorOnSurface fixed  block left-0 overflow-hidden;
+  @apply bg-colorSecondary w-full h-full bottom-0  fixed  block left-0 overflow-hidden;
 }
 .content {
-        width: 200px;
-        height: 600px;
-        position: absolute; /*Can also be `fixed`*/
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        margin: auto;
-        /*Solves a problem in which the content is being cut when the div is smaller than its' wrapper:*/
-        max-width: 100%;
-        max-height: 100%;
+  width: 144px;
+  height: 144px;
+  position: absolute; /*Can also be `fixed`*/
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  /*Solves a problem in which the content is being cut when the div is smaller than its' wrapper:*/
+  max-width: 100%;
+  max-height: 100%;
 }
 .fadeout {
-  animation: fadeout 2s forwards;
+  animation: fadeout 3s forwards;
 }
 
 @keyframes fadeout {

@@ -20,19 +20,10 @@ body {
 }
 
 @layer utilities {
-  .ripple {
-    background-position: center;
-    transition: background 0.8s;
-  }
 
-  .ripple:hover {
-    background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
-  }
-
-  .ripple:active {
-    background-color: theme('colors.colorSurface');
-    background-size: 100%;
-    transition: background -1s;
+  .outline input:focus-within~label,
+  .outline input:not(:placeholder-shown)~label {
+    @apply transform scale-75 -translate-y-6;
   }
 
   .display1 {

@@ -91,7 +91,6 @@
 
 
 <script lang="ts" setup>
-import Icon from "../md/Icon.vue";
 import { MenuItem } from "@/classes/UiClasses.vue";
 import { FunctionalComponent } from "vue";
 
