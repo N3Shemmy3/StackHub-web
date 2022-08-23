@@ -19,7 +19,7 @@ body {
   height: 100%;
 }
 
-@layer utilities {
+@layer components {
 
   .outline input:focus-within~label,
   .outline input:not(:placeholder-shown)~label {

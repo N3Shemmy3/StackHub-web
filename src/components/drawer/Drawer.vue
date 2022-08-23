@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-show="props.isDrawerOpen">
     <ul
       class="
         md:w-80
@@ -16,18 +16,50 @@
         md:relative
       "
     >
-      <div class="p-2 mb-1 flex items-center">
-        <Icon
-          icon="menu"
-          alt="Home Page"
-          @click="toggleDrawer()"
-          class="mr-3 text-colorPrimary"
-        />
-        <p class="text-colorOnSurface title-large font-extrabold">
-          StackHub {{ isDrawerOpen }}
-        </p>
+      <!-- User Card -->
+      <div
+        class="
+          px-2
+          py-4
+          my-4
+          rounded-xl
+          min-h-fit
+          h-20
+          cursor-pointer
+          hover:bg-colorOutline hover:bg-opacity-20
+          transition-all
+          flex flex-grow-row
+          bg-colorPrimaryContainer bg-opacity-50
+          active:bg-colorPrimaryContainer
+        "
+      >
+        <div class="shrink-0">
+          <img
+            src="https://avatars.githubusercontent.com/u/67279072?v=4"
+            class="rounded-full w-10"
+            alt="Avatar"
+          />
+        </div>
+        <div class="flex-col max-h-fit ml-3">
+          <p
+            class="text-sm font-sans font-semibold text-colorOnPrimaryContainer"
+          >
+            Shemmy Nyirenda
+          </p>
+          <p
+            class="
+              text-xs
+              font-sans font-semibold
+              text-colorOnPrimaryContainer text-opacity-70
+            "
+          >
+            @Shemmy3
+          </p>
+        </div>
       </div>
-
+      <!-- divider
+      <div class="bg-colorOutline bg-opacity-30 h-[1px] w-80 -mx-4 mb-4" />
+       -->
       <li
         v-for="(menuItem, index) in menu"
         :key="menuItem.Id"
@@ -95,8 +127,8 @@
     <transition name="fade">
       <!-- showDrawerOverlay -->
       <div
-        v-if="isDrawerOpen && showDrawerOverlay"
-        @click="toggleDrawer()"
+        v-if="props.isDrawerOpen && showDrawerOverlay"
+        @click=""
         class="
           absolute
           w-full
@@ -113,7 +145,7 @@
 </style>
 
 <script lang="ts" setup>
-import { MenuItem } from "@/classes/UiClasses.vue";
+import { MenuItem } from "@/classes/MenuItem";
 import { computed, ref } from "vue";
 import { useRoute } from "vue-router";
 
@@ -122,17 +154,13 @@ const props = defineProps<{
   menu: Array<MenuItem>;
 }>();
 
-const route = useRoute();
+const emit = defineEmits(["onOverlayClicked", "onMenuItemClicked"]);
+
 //Variables
-let isRTL = false;
-let isDrawerOpen = false;
-let showDrawerOverlay = true;
+let showDrawerOverlay = ref(true);
 var menu: Array<MenuItem> = props.menu;
 let activeId = ref(0);
 
-function toggleDrawer() {
-  isDrawerOpen = !isDrawerOpen;
-}
 function setActive(menuItem: MenuItem) {
   activeId.value = menuItem.Id;
 }

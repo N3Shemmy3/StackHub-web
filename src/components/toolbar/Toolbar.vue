@@ -21,7 +21,7 @@
         p-3
         rounded-full
         hover:bg-opacity-10 hover:bg-colorOnSurface
-        active:bg-opacity-10 active:bg-colorOnSurface
+        active:bg-opacity-30 active:bg-colorPrimaryContainer
         transitions-all
         duration-250
         ease-in-out
@@ -35,12 +35,12 @@
       />
     </div>
 
-    <div
+    <p
       id="title"
-      class="text-xl ml-1 text-colorOnSurface text-center align-middle"
+      class="text-xl ml-3 text-colorOnSurface text-center align-middle"
     >
-      {{ (props.title, props.navigateUp) }}
-    </div>
+      {{ props.title }}
+    </p>
 
     <div id="spacer" class="flex-1 h-full"></div>
 
@@ -60,6 +60,7 @@
         group
         rounded-full
         hover:bg-opacity-10 hover:bg-colorOnSurface
+        active:bg-opacity-30 active:bg-colorPrimaryContainer
         cursor-pointer
       "
     >
@@ -67,6 +68,7 @@
     </div>
 
     <div
+      v-if="props.avatar"
       class="
         w-12
         h-12
@@ -75,13 +77,14 @@
         align-middle
         rounded-full
         hover:bg-opacity-10 hover:bg-colorOnSurface
+        active:bg-opacity-30 active:bg-colorPrimaryContainer
       "
       data-mdb-ripple="true"
       @click="onAvatarItemClicked()"
     >
       <img
         id="avatar"
-        src="https://avatars.githubusercontent.com/u/67279072?v=4"
+        :src="props.avatar"
         alt="Avatar"
         class="w-8 h-8 rounded-full"
       />
@@ -91,14 +94,14 @@
 
 
 <script lang="ts" setup>
-import { MenuItem } from "@/classes/UiClasses.vue";
+import { MenuItem } from "@/classes/MenuItem";
 import { FunctionalComponent } from "vue";
 
 const props = defineProps<{
   navigateUp: Boolean;
-  title: String;
+  title: string;
   menu: Array<MenuItem>;
-  avatar: String;
+  avatar: string;
 }>();
 const emit = defineEmits([
   "onBackItemClicked",

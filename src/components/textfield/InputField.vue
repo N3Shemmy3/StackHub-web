@@ -1,30 +1,61 @@
 <template>
   <form>
     <div class="md-input-main">
-      <div class="md-input-box group rounded-sm outline-colorOutline">
+      <div
+        ref="fields"
+        class="md-input-box group rounded-sm outline-colorOutline"
+      >
         <input
-          id="input"
+          :ref="props.id"
           name="input"
-          type="text"
-          class="md-input"
+          class="md-input no-autofill-bg"
           placeholder=" "
+          :v-model="props.text"
+          v-bind="$attrs"
         />
-        <label for="input" class="md-label">{{ props.label }}</label>
+        <label :for="props.id" class="md-label text-clip">{{
+          props.label
+        }}</label>
       </div>
     </div>
   </form>
 </template>
 
+<script lang="ts">
+export default {
+  inheritAttrs: false,
+};
+</script>
 <script lang="ts" setup>
+import { onMounted, ref } from "vue";
 const props = defineProps<{
-  text: String;
-  label: String;
+  id: string;
+  text: string;
+  label: string;
+  type: string;
 }>();
 const emit = defineEmits([
   "onBackItemClicked",
   "onMenuItemClicked",
   "onAvatarItemClicked",
 ]);
+
+var showPassword = ref(false);
+var type = ref(props.type);
+var display = ref("inline");
+
+onMounted(() => {});
+function togglePass() {
+  if (props.type === "password") {
+    showPassword.value = true;
+    type.value = "text";
+    display.value = "inline";
+  } else {
+    showPassword.value = false;
+    type.value = "password";
+    display.value = "non";
+  }
+}
 </script>
 
 
@@ -54,6 +85,7 @@ const emit = defineEmits([
 
 .md-input {
   @apply w-full px-3 
+  text-base
             rounded-sm
             border border-colorOutline
             outline-colorOutline
@@ -62,9 +94,16 @@ const emit = defineEmits([
             invalid:outline-colorError;
   width: 100%;
   height: 56px;
+
+  -webkit-animation-delay: 1s; /* Safari support - any positive time runs instantly */
+  -webkit-animation-name: autofill;
+  -webkit-animation-fill-mode: both;
+}
+.md-input.no-autofill-bg:-webkit-autofill {
+  -webkit-background-clip: text;
 }
 .md-label {
-  @apply absolute pointer-events-none block mx-3 text-clip pl-0 pr-0 
+  @apply text-base absolute pointer-events-none block mx-3 text-clip pl-0 pr-0 
             text-colorOnSurfaceVariant
             focus:text-colorPrimary;
   display: block;

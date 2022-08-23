@@ -2,31 +2,18 @@ import { createApp } from 'vue'
 import './style.css'
 import './assets/base.css'
 import App from './App.vue'
+import Button from './components/button/Button.vue'
+import Toolbar from './components/toolbar/Toolbar.vue'
+import InputField from './components/textfield/InputField.vue'
 import Icon from './components/icon/Icon.vue'
-import { createRouter, createWebHistory } from 'vue-router'
-import MainView from './views/MainView.vue'
-import Drawer from './components/naviagtion/Drawer.vue'
-import HelloWorld from './components/HelloWorld.vue'
+import Router from './components/router/Router'
 
 
 const app = createApp(App)
-const router = createRouter({
-    history: createWebHistory(),
-    routes: [
-        {
-            path: '/',
-            component: HelloWorld,
-        },
-    ],
-})
 app.component('Icon', Icon)
-app.use(router)
+app.component('Button', Button)
+app.component('Toolbar', Toolbar)
+app.component('Toolbar', Toolbar)
+app.component('InputField', InputField)
+app.use(Router)
 app.mount('#app')
-
-css: {
-    loaderOptions: {
-        modules: {
-            auto: () => true
-        }
-    }
-}
