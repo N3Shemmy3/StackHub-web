@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@headlessui/vue": "^1.6.7",
+    "@supabase/supabase-js": "^1.35.6",
     "@vueuse/core": "^8.9.3",
-    "firebase": "^9.9.3",
+    "pinia": "^2.0.21",
+    "pinia-plugin-persistedstate": "^2.1.1",
     "vue": "^3.2.37",
     "vue-router": "^4.1.3"
   },

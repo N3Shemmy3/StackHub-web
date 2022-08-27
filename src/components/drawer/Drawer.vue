@@ -2,17 +2,15 @@
   <div v-show="props.isDrawerOpen">
     <ul
       class="
-        md:w-80
+        w-80
         p-4
-        h-full
-        z-3
-        md:left-0
+        h-screen
+        z-40
         shadow-md
         bg-colorSurface
         transition-all
         duration-300
         ease-in-out
-        absolute
         md:relative
       "
     >
@@ -129,14 +127,7 @@
       <div
         v-if="props.isDrawerOpen && showDrawerOverlay"
         @click=""
-        class="
-          absolute
-          w-full
-          h-full
-          bg-gray-400 bg-opacity-60
-          active:outline-none
-          z-2
-        "
+        class="w-full h-full bg-gray-400 bg-opacity-60 active:outline-none z-30"
       />
     </transition>
   </div>

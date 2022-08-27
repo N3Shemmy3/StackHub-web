@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HelloWorld from "../HelloWorld.vue";
+import HelloWorld from "../../components/HelloWorld.vue";
 import MainView from "../../views/main/MainView.vue";
 import SignupView from "../../views/auth/SignupView.vue";
 
@@ -12,6 +12,7 @@ export default createRouter({
         },
 
         {
+            name: 'main',
             path: '/main',
             component: MainView,
         },

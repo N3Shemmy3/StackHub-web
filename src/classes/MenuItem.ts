@@ -4,15 +4,15 @@ export default {}
 
 export class MenuItem {
     private id: number;
-    private icon: String;
+    private icon: string;
     private title: string;
-    private path?: String;
+    private path?: string;
 
     /*
       constructor() { }
       */
 
-    constructor(id: number, icon: String, title: string) {
+    constructor(id: number, icon: string, title: string) {
         this.id = id;
         this.icon = icon;
         this.title = title;
@@ -22,13 +22,13 @@ export class MenuItem {
     set Id(id: number) {
         this.Id = id;
     }
-    set Icon(icon: String) {
+    set Icon(icon: string) {
         this.icon = icon;
     }
     set Title(title: string) {
         this.title = title;
     }
-    set Path(path: String) {
+    set Path(path: string) {
         this.path = path;
     }
 
@@ -72,9 +72,8 @@ export function getToolbarMenu(key: string): Array<MenuItem> {
     let list: Array<MenuItem> = new Array<MenuItem>();
     switch (key) {
         case "home":
-            for (let index = 0; index < 3; index++) {
-                list.push(new MenuItem(index, "menu", "MenuItem " + index));
-            }
+            list.push(new MenuItem(0, "search", "Search"));
+            list.push(new MenuItem(1, "https://avatars.githubusercontent.com/u/67279072?v=4", "Avatar "));
             break;
 
         default:

@@ -9,7 +9,12 @@ module.exports = {
     extend: {
     },
     colors: {
-      colorPrimary: "#376a1f",
+      transparent: 'transparent',
+
+      colorPrimary: {
+        light: "#376a1f",
+        dark: "",
+      },
       colorOnPrimary: "#ffffff",
       colorPrimaryContainer: "#b7f397",
       colorOnPrimaryContainer: "#042100",

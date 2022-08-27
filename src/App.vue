@@ -1,12 +1,12 @@
 <template>
   <div>
-    <SplashScreen :showSpashScreen="showSpashScreen" />
+    <SplashScreen class="hidden" :showSpashScreen="showSpashScreen" />
     <main v-show="!showSpashScreen">
       <div
         id="root"
         class="
           select-none
-          flex
+          md:flex
           absolute
           aling-items-stretch
           overflow-hidden
@@ -26,7 +26,10 @@
         <div
           id="container"
           class="
-            relative
+            z-0
+            md:relative
+            inset-0
+            absolute
             h-full
             shrink
             flex-1
@@ -48,27 +51,45 @@ import SplashScreen from "./views/splashscreen/splashscreen.vue";
 
 import { onMounted, ref } from "vue";
 import { getDrawerMenu } from "./classes/MenuItem";
-import Router from "./components/router/Router";
+import router from "./libs/router/Router";
+import { store } from "./api/store/store";
+import { supabase } from "./api/supabase/Supabase";
 
 var isLoading = ref(true);
 var showSpashScreen = ref(true);
 var isDrawerOpen = ref(true);
 
+store.user = supabase.auth.user() ?? {};
+supabase.auth.onAuthStateChange((_, session) => {
+  if (session) {
+    store.user = session.user ?? {};
+  }
+});
+
 onMounted(() => {
+  // isUserLoggedIn();
   setTimeout(() => {
     showSpashScreen.value = false;
   }, 5000);
 });
 
-Router.beforeEach((to, from) => {
+router.beforeEach((to, from) => {
   showProgressScreen(true);
   if (to.name == "signup") {
-    showSpashScreen.value = false;
+    isDrawerOpen.value = false;
   }
 });
-Router.afterEach((to, from) => {
+router.afterEach((to, from) => {
   showProgressScreen(false);
 });
+
+function isUserLoggedIn() {
+  if (store.user) {
+    router.push("main");
+  } else {
+    router.push("signup");
+  }
+}
 function showProgressScreen(bool: boolean) {
   setTimeout(() => {
     isLoading.value = false;
@@ -79,4 +100,5 @@ function showProgressScreen(bool: boolean) {
 
 <style src="">
 </style>
+
   

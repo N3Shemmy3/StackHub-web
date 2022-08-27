@@ -37,7 +37,13 @@
 
     <p
       id="title"
-      class="text-xl ml-3 text-colorOnSurface text-center align-middle"
+      class="
+        text-xl
+        font-semibold
+        ml-3
+        text-colorOnSurface text-center
+        align-middle
+      "
     >
       {{ props.title }}
     </p>
@@ -49,13 +55,16 @@
       v-for="menuItem in props.menu"
       :key="menuItem.Title"
       data-mdb-ripple="true"
-      @click.capture="onMenuItemClicked(menuItem.Id)"
+      @click="
+        menuItem.Icon.startsWith('http')
+          ? onAvatarItemClicked()
+          : onMenuItemClicked(menuItem.Id)
+      "
       class="
         transition-all
         duration-150
         w-12
         h-12
-        p-3
         align-middle
         group
         rounded-full
@@ -63,31 +72,16 @@
         active:bg-opacity-30 active:bg-colorPrimaryContainer
         cursor-pointer
       "
-    >
-      <Icon :icon="menuItem.Icon" :alt="menuItem.Title" />
-    </div>
-
-    <div
-      v-if="props.avatar"
-      class="
-        w-12
-        h-12
-        p-2
-        cursor-pointer
-        align-middle
-        rounded-full
-        hover:bg-opacity-10 hover:bg-colorOnSurface
-        active:bg-opacity-30 active:bg-colorPrimaryContainer
-      "
-      data-mdb-ripple="true"
-      @click="onAvatarItemClicked()"
+      :class="menuItem.Icon.startsWith('http') ? 'p-2' : 'p-3'"
     >
       <img
+        v-if="menuItem.Icon.startsWith('http')"
         id="avatar"
-        :src="props.avatar"
+        :src="menuItem.Icon"
         alt="Avatar"
         class="w-8 h-8 rounded-full"
       />
+      <Icon v-else :icon="menuItem.Icon" :alt="menuItem.Title" />
     </div>
   </nav>
 </template>
@@ -95,13 +89,11 @@
 
 <script lang="ts" setup>
 import { MenuItem } from "@/classes/MenuItem";
-import { FunctionalComponent } from "vue";
 
 const props = defineProps<{
   navigateUp: Boolean;
   title: string;
   menu: Array<MenuItem>;
-  avatar: string;
 }>();
 const emit = defineEmits([
   "onBackItemClicked",
